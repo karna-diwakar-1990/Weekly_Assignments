@@ -113,4 +113,5 @@ public class Day_1 {
         System.out.println("Title of the resulting page is "+ driver.getTitle() );
         driver.quit();
     }
+
 }
