@@ -27,7 +27,7 @@ public class Assignment_Day_2 {
         System.out.println("Test Successfull");
         driver.quit();
     }*/
-    public static void Assignment_2(){
+    /*public static void Assignment_2(){
         chromedriverSetup();
         ChromeDriver driver = new ChromeDriver();
         initializeDriver(driver, "https://www.salesforce.com/in/form/signup/freetrial-sales/?d=70130000000Enyk");
@@ -50,11 +50,22 @@ public class Assignment_Day_2 {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         System.out.println("Test Successfull");
         driver.quit();
-    }
+    }*/
     public static void Assignment_3(){
 
     }
     public static void Assignment_4(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "https://acme-test.uipath.com/login");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        enterText(driver, "xpath","//div[@class=\"controls\"]//input[@id=\"email\" and @name=\"email\"]", "kumar.testleaf@gmail.com");
+        enterText(driver, "xpath", "//div[@class=\"controls\"]//input[@id=\"password\" and @name=\"password\"]", "leaf@12");
+        elementClick(driver, "xpath", "//button[@type=\"submit\"]");
+        System.out.println(driver.getTitle());
+        elementClick(driver, "xpath", "//a[@href=\"https://acme-test.uipath.com/logout\"]");
+        driver.close();
+        System.out.println("Test Successfull");
 
     }
     public static void Assignment_5(){
@@ -99,6 +110,6 @@ public class Assignment_Day_2 {
     }
 
     public static void main(String[] args) {
-        Assignment_Day_2.Assignment_2();
+        Assignment_Day_2.Assignment_4();
     }
 }
