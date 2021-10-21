@@ -2,14 +2,17 @@ package week_2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Assignment_Day_2 {
-    /*public static void Assignment_1(){
+    public static void Assignment_1(){
         chromedriverSetup();
         ChromeDriver driver = new ChromeDriver();
         initializeDriver(driver, "https://en-gb.facebook.com/");
@@ -26,7 +29,7 @@ public class Assignment_Day_2 {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         System.out.println("Test Successfull");
         driver.quit();
-    }*/
+    }
     public static void Assignment_2(){
         chromedriverSetup();
         ChromeDriver driver = new ChromeDriver();
@@ -51,10 +54,123 @@ public class Assignment_Day_2 {
         System.out.println("Test Successfull");
         driver.quit();
     }
-    public static void Assignment_3(){
+    public static void Ass_3_Sub_1(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "http://leaftaps.com/opentaps/control/login");
+        enterText(driver, "class", "inputLogin", "Demosalesmanager");
+        enterText(driver, "id", "password", "crmsfa");
+        elementClick(driver, "class", "decorativeSubmit");
+        elementClick(driver, "link-text", "CRM/SFA");
+        elementClick(driver, "xpath", "//a[@href='/crmsfa/control/contactsMain']");
+        elementClick(driver, "xpath", "//li//a[@href='/crmsfa/control/createContactForm']");
+
+        enterText(driver, "id", "firstNameField", "Karna");
+        enterText(driver, "id", "lastNameField", "Diwakar");
+        enterText(driver, "id", "createContactForm_firstNameLocal", "Karna");
+        enterText(driver, "id", "createContactForm_lastNameLocal", "Diwakar");
+        enterText(driver, "id", "createContactForm_departmentName", "CBA");
+        enterText(driver, "id", "createContactForm_description", "Lorem Ipsum");
+        enterText(driver, "id", "createContactForm_primaryEmail", "a@a.com");
+
+        selectDropdown(driver,"id", "createContactForm_generalStateProvinceGeoId", "New York");
+        elementClick(driver, "xpath", "//input[@value='Create Contact']");
+        elementClick(driver, "link-text", "Edit");
+        clearText(driver, "id", "updateContactForm_description");
+        enterText(driver, "id", "updateContactForm_importantNote", "lorem");
+        elementClick(driver, "xpath", "//input[@type='submit' and @value='Update']");
+        System.out.println(driver.getTitle());
+        System.out.println("Test Successfull");
+        driver.close();
+    }
+    public static void Ass_3_Sub_3(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "http://leaftaps.com/opentaps/control/login");
+        enterText(driver, "class", "inputLogin", "Demosalesmanager");
+        enterText(driver, "id", "password", "crmsfa");
+        elementClick(driver, "class", "decorativeSubmit");
+        elementClick(driver, "link-text", "CRM/SFA");
+        elementClick(driver, "link-text", "Leads");
+        elementClick(driver, "link-text", "Find Leads");
+        elementClick(driver, "xpath", "//span[contains(text(), 'Phone')]");
+        enterText(driver, "xpath", "//input[@type='text' and @name='emailAddress']", "a@a.com");
+        elementClick(driver, "xpath", "//button[contains(text(), 'Find Leads')]");
+        String targetLead = getElement("xpath", "((((//div[@class='x-grid3-body']//table[@class='x-grid3-row-table'])[1]//a)[3]", driver).getText();
+        elementClick(driver, "xpath", "((//div[@class='x-grid3-body']//table[@class='x-grid3-row-table'])[1]//a)[1]");
+        String sectionHeaderTitle = getElement("xpath", "//div[@id='sectionHeaderTitle_leads']", driver).getText();
+        Assert.assertEquals(sectionHeaderTitle, "Duplicate Lead", "Section Header verified");
+        elementClick(driver, "xpath", "//input[@type='submit' and @value='Create Lead']");
+        String leadName = getElement("xpath", "//span[@id='viewLead_firstName_sp']", driver).getText();
+        Assert.assertEquals(leadName, targetLead, "Lead Name Verified");
+        driver.close();
 
     }
+    public static void Ass_3_Sub_4(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "http://leaftaps.com/opentaps/control/login");
+        enterText(driver, "class", "inputLogin", "Demosalesmanager");
+        enterText(driver, "id", "password", "crmsfa");
+        elementClick(driver, "class", "decorativeSubmit");
+        elementClick(driver, "link-text", "CRM/SFA");
+        elementClick(driver, "link-text", "Leads");
+        elementClick(driver, "link-text", "Find Leads");
+        enterText(driver, "xpath", "//input[@type='text' and @name='firstName']", "Lorem");
+        elementClick(driver, "xpath", "((//div[@class='x-grid3-body']//table[@class='x-grid3-row-table'])[1]//a)[1]");
+        clearText(driver, "xpath", "//input[@type='text' and @name='companyName']");
+        enterText(driver, "xpath", "//input[@type='text' and @name='companyName']", "Lorem Ipsum");
+        elementClick(driver, "xpath", "//input[@type='submit' and @value='Update']");
+        String companyName = getElement("xpath", "//span[@id='viewLead_companyName_sp']", driver).getText();
+        Boolean contains = companyName.contains("Lorem");
+        Assert.assertEquals(contains, Boolean.TRUE, "Edit confirmed");
+        driver.close();
+    }
+    public static void Ass_3_Sub_2(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "http://leaftaps.com/opentaps/control/login");
+        enterText(driver, "class", "inputLogin", "Demosalesmanager");
+        enterText(driver, "id", "password", "crmsfa");
+        elementClick(driver, "class", "decorativeSubmit");
+        elementClick(driver, "link-text", "CRM/SFA");
+        elementClick(driver, "link-text", "Leads");
+        elementClick(driver, "link-text", "Find Leads");
+        elementClick(driver, "xpath", "//span[contains(text(), 'Phone')]");
+        clearText(driver, "xpath", "//input[@type='text' and @name='phoneCountryCode']");
+        enterText(driver, "xpath", "//input[@type='text' and @name='phoneCountryCode']", "1");
+        enterText(driver, "xpath", "//input[@type='text' and @name='phoneAreaCode']", "11");
+        enterText(driver, "xpath", "//input[@type='text' and @name='phoneNumber']", "111111111");
+        elementClick(driver, "xpath", "//button[contains(text(), 'Find Leads')]");
+        String targetLead = getElement("xpath", "((//div[@class='x-grid3-body']//table[@class='x-grid3-row-table'])[1]//a)[1]", driver).getText();
+        //driver.navigate().refresh();
+        elementClick(driver, "xpath", "((//div[@class='x-grid3-body']//table[@class='x-grid3-row-table'])[1]//a)[1]");
+        elementClick(driver, "xpath", "//a[contains(text(), 'Delete')]");
+        elementClick(driver, "link-text", "Find Leads");
+        enterText(driver, "xpath", "//input[@name='id']", targetLead);
+        elementClick(driver, "link-text", "Find Leads");
+        String actualText = getElement("xpath", "//div[contains(text(), 'No records to display')]", driver).getText();
+        Assert.assertEquals(actualText,"No records to display", "Test successfull");
+        driver.close();
+    }
+    public static void Assignment_3(){
+        Ass_3_Sub_1();
+        Ass_3_Sub_2();
+        Ass_3_Sub_3();
+        Ass_3_Sub_4();
+    }
     public static void Assignment_4(){
+        chromedriverSetup();
+        ChromeDriver driver = new ChromeDriver();
+        initializeDriver(driver, "https://acme-test.uipath.com/login");
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        enterText(driver, "xpath","//div[@class=\"controls\"]//input[@id=\"email\" and @name=\"email\"]", "kumar.testleaf@gmail.com");
+        enterText(driver, "xpath", "//div[@class=\"controls\"]//input[@id=\"password\" and @name=\"password\"]", "leaf@12");
+        elementClick(driver, "xpath", "//button[@type=\"submit\"]");
+        System.out.println(driver.getTitle());
+        elementClick(driver, "xpath", "//a[@href=\"https://acme-test.uipath.com/logout\"]");
+        driver.close();
+        System.out.println("Test Successfull");
 
     }
     public static void Assignment_5(){
@@ -98,7 +214,15 @@ public class Assignment_Day_2 {
         dropdown.selectByVisibleText(value);
     }
 
+    public static void clearText(ChromeDriver driver, String identifierType, String identifier){
+        WebElement el = getElement(identifierType, identifier, driver);
+        el.clear();
+    }
+
     public static void main(String[] args) {
+        Assignment_Day_2.Assignment_1();
         Assignment_Day_2.Assignment_2();
+        Assignment_Day_2.Assignment_3();
+        Assignment_Day_2.Assignment_4();
     }
 }
